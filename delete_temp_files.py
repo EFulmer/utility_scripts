@@ -1,22 +1,26 @@
 import os
 import sys
 
-TEMP_FILE_SIGNIFIERS = ['~']
+TEMP_FILE_SIGNIFIERS = ['~'] # gonna do something with this; re.match??
 
-def kill_temps(path, recursive=False):
-    for p in os.path.expanduser(path):
-        files = os.listdir(p)
+def kill_temps(paths, recursive=False):
+    for p in paths:
+        path = os.path.expanduser(p)
+        files = os.listdir(path)
         temp_files = filter(lambda f: f[-1] == '~', files)
-        map(lambda t: os.remove(p + '/' + t), temp_files)    
+        map(lambda t: os.remove(path + '/' + t), temp_files)    
 
 def main():
     """
     Deletes all temporary files in each of the path names given as args.
     The path names may be absolute or relative.
+    If no argument is given, temp files in the current directory will be 
+    killed.
     """
     if len(sys.argv) == 1:
-        print 'Please provide at least one path name.'
+        kill_temps('.')
     else:
+        kill_temps(sys.argv[1:])
 
 
 if __name__ == '__main__':
