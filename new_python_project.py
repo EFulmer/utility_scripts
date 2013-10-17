@@ -1,14 +1,29 @@
+import os
+import shutil
+import subprocess
+import sys
 
+def make_readme(proj_name):
+    """Make a basic README.md in folder proj_name."""
+    subprocess.call(['touch', proj_name + 'README.md'])
+
+def make_setup(proj_name):
+    """Make a basic setup.py file in the new project directory proj_name."""
+    shutilcopyfile('~/Projects/utility_scripts/setup.py', 
+                   proj_name + 'setup.py')
 
 def main():
-    # read in command line args; separated by spaces, each one is the name of
-    # a new Python project.
-    
-    # for each arg, create the project structure; this includes:
-    # making the top-level directory, should have same name as the arg
-    # making top dir's subdirs; proj_name (for source code), tests, doc
-    # creating a README in the top directory
-    # initializing a git repo
-    # possibly in the future setting up a virtualenv for it?
-    
-    # os.makedirs()
+    # loop through all given arg names; for each, make a project skeletin 
+    # (top level folder, src folder, doc folder, tests folder, __init__.py)
+    # advanced/for later: set up a git repo and virtualenv?
+    for arg in sys.argv[1:]:
+        root = './' + arg + '/'
+        os.makedirs(root)
+        os.makedirs(root + arg)
+        os.makedirs(root + 'tests')
+        os.makedirs(root + 'docs')
+        make_readme(root)
+        make_setup(root)
+
+if __name__ == '__main__':
+    main()
