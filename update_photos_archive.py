@@ -14,14 +14,11 @@ def is_image_file(f):
 
 def get_image_files(folder=IMAGE_DIR):
     fldr_contents = os.listdir(path=folder)
-    img_files = []
-    for f in fldr_contents:
-        if is_image_file(f):
-            img_files.append(os.path.join(folder, f))
+    img_files = [ f for f in os.listdir(path=folder) if is_image_file(f) ]
+    #for f in fldr_contents:
+    #    if is_image_file(f):
+    #        img_files.append(os.path.join(folder, f))
     return img_files
-    # open up archive file
-    # check for existence of any of these image files in the archive file (how?)
-    # add new files to archive file
 
 
 def archive_image_files(img_files, archive_name=ARCHIVE_FILE, mode='w:gz'):
