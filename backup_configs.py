@@ -30,13 +30,12 @@ def backup(f, backup_loc):
     Back up file f to backup_loc. If f is a folder instead, 
     back its contents up to backup_loc.
     """
-    # TODO automatically add stuff to repo, commit + push it
     # check what f is:
     # if f is a file, just do copy(f, os.path.join(f, backup_loc)
     # otherwise, os.walk over the directory and move each of the files.
     if os.path.isfile(f):
         shutil.copy(f, os.path.join(f, backup_loc))
-        print('Found and backed up newer version of {0}'.format(f))
+        print('Found and copied newer version of {0} to {1}'.format(f, backup_loc))
     else:
         dir_tree = os.walk(f)
         # TODO this is ugly. make it nicer.
