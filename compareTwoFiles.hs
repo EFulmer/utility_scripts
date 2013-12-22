@@ -3,11 +3,11 @@ import qualified Data.ByteString as B
 import System.Environment
 
 fileHash :: B.ByteString -> B.ByteString
-fileHash bs = go SHA256.init bs
+fileHash bs = hashFn SHA256.init bs
     where 
-        go ctx bs 
+        hashFn ctx bs 
             | bs == B.empty = SHA256.finalize ctx
-            | otherwise = go (SHA256.update ctx start) rest
+            | otherwise = hashFn (SHA256.update ctx start) rest
                     where 
                         start = B.take 8 bs
                         rest = B.drop 8 bs
