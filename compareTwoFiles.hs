@@ -18,4 +18,4 @@ main = do
         fName2 = args !! 1
     f1 <- B.readFile fName1
     f2 <- B.readFile fName2
-    print $ (fileHash f1) == (fileHash f2)
+    putStrLn $ show $ (fileHash f1) == (fileHash f2)
