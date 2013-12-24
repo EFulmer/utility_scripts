@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-# TODO make usable for an arbitrary number of files. idea - make a 
-# class inheriting file that overrides __eq__.
 
 import hashlib
 import sys
