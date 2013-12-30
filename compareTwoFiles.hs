@@ -1,3 +1,5 @@
+module CompareTwoFiles (fileHash, main) where
+
 import qualified Crypto.Hash.SHA256 as SHA256
 import qualified Data.ByteString as B
 import System.Environment
