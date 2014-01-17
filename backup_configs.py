@@ -16,10 +16,11 @@ def newer_version(f, backup):
     Compare the last modified times of f and backup. 
     Returns True if f is newer than backup, otherwise False.
     """
-    f_stat = os.stat(f)
+    f_modtime = os.path.getmtime(f)
+    # backup might not exist, so...
     try:
-        b_stat = os.stat(backup)
-        return f_stat.st_ctime > b_stat.st_ctime
+        b_modtime = os.path.getmtime(f)
+        return f_modtime > b_modtime
     except OSError:
         # if file hasn't been backed up before, True by default
         return True
